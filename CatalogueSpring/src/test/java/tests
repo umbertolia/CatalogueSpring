@@ -1,0 +1,30 @@
+Si Tomcat
+	server.xml : 	verifier le path
+					creer la liaison a la base dans <GlobalNamingResources>
+					 	 <Resource name="jdbc/Catalogue" global="jdbc/Catalogue"  type="javax.sql.DataSource" username="root"  password="admin" driverClassName="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/catalogue"  maxTotal="10" />
+
+	context.xml : configurer le jndi
+						<ResourceLink name="jdbc/CatalogueAppli" global="jdbc/Catalogue" type="javax.sql.DataSource" />
+
+Dans le contexte applicatif
+		<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+			<property name="jndiName" value="java:comp/env/jdbc/CatalogueAppli" />
+		</bean>
+
+
+http://localhost:8080/HelloWorldSpring/
+	appelle la page d'accueil  (defini dans web.wml)
+	
+http://localhost:8080/CatalogueSpring/hello?age=43
+	via SPRING, appelle le controller BonjourController 
+	en lui passant un parametre
+	
+	
+http://localhost:8080/CatalogueSpring/produits
+http://localhost:8080/CatalogueSpring/ajouterProduit
+	gestion produits
+	
+	
+	
+	
+
